@@ -25,6 +25,14 @@
           <label>Actual location : </label>
           <span>{{ character.location.name }}</span>
         </div>
+        <a href="#" @click="updateCollection">
+          <template v-if="characterIsFavorite()">
+            Remove from my collection
+          </template>
+          <template v-else>
+            Add to my collection
+          </template>
+        </a>
       </div>
     </div>
   </div>
@@ -32,12 +40,14 @@
 
 <script>
   import SaisonsMenu from '../components/SaisonsMenu'
+  import characterStorage from '../mixins/characterStorage.js'
 
   export default {
     name: 'CharacterDetail',
     components: {
       SaisonsMenu
     },
+    mixins: [characterStorage],
     data() {
       return {
         characterId: null,
@@ -53,6 +63,7 @@
       }
     },
     methods: {
+      // Appelle le WS character
       getCharacter: function() {
       return fetch(`https://rickandmortyapi.com/api/character/${this.characterId}`, {
         'method': 'GET'
@@ -64,6 +75,7 @@
           console.log(error)
         })
       },
+      // Appelle le WS location
       getLocation: function(locationUrl) {
       return fetch(locationUrl, {
         'method': 'GET'
@@ -74,6 +86,18 @@
         .catch(error => {
           console.log(error)
         })
+      },
+      // Détermine si le personnage est déjà ajouté
+      characterIsFavorite: function() {
+        return this.characterStored(this.character)
+      },
+      // Ajout ou suppression des favoris
+      updateCollection: function() {
+        if (this.characterStored(this.character)) {
+          this.removeCharacter(this.character)
+        } else {
+          this.storeCharacter(this.character)
+        }
       }
     },
     async created () {
@@ -85,6 +109,8 @@
       if (this.character.location) {
         this.character.location = await this.getLocation(this.character.location.url)
       }
+      // Set HTML Title
+      document.title = 'Rick and Morty | ' + this.character.name;
     }
   }
 </script>

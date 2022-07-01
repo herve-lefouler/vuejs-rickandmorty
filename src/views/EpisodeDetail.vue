@@ -70,6 +70,9 @@ export default {
         .catch(error => {
           console.log(error)
         })
+    },
+    setHtmlTitle: function() {
+      document.title = 'Rick and Morty | ' + this.episode.episode;
     }
   },
   // watch
@@ -79,11 +82,15 @@ export default {
     async episodeId () {
       this.episode = await this.getRawEpisode()
       this.characters = await this.getCharactersDetails()
+      // Update HTML title
+      this.setHtmlTitle();
     }
   },
   async created () {
     this.episode = await this.getRawEpisode()
     this.characters = await this.getCharactersDetails()
+    // Set initial HTML title
+    this.setHtmlTitle();
   }
 }
 </script>

@@ -1,5 +1,12 @@
 <template>
   <div id="app">
+    <ul class="header-menu">
+      <li>
+        <router-link :to="{ name: 'My collection'}">
+          My Collection
+        </router-link>
+      </li>
+    </ul>
     <a href="/"><img class="logo" src="@/assets/logo.png" /></a>
     <router-view/>
   </div>
@@ -7,7 +14,10 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  created () {
+    document.title = "Rick and Morty";
+  }
 }
 </script>
 
@@ -24,5 +34,16 @@ export default {
   font-family: "Creepster";
   src: local("Creepster"),
    url(./fonts/Creepster/creepster.ttf) format("truetype");
+}
+
+input {
+  padding: 20px;
+  color: #01B4C6;
+  font-size: 18px;
+  width: 50%;
+}
+.header-menu {
+      position: fixed;
+    right: 10%;
 }
 </style>

@@ -1,18 +1,26 @@
 <template>
   <div>
-    <SaisonsMenu>
-    </SaisonsMenu>
-    <h1>Choose your season</h1>
+    <h1>Choose your episode</h1>
+    <SaisonsMenu></SaisonsMenu>
+    <h2>Or search a character</h2>
+    <CharacterSearch></CharacterSearch>
+    <p>
+      This app is a VueJS POC listing seasons, episodes and characters from Rick and Morty animated science fiction sitcom.
+      <br>
+      The data came from the <a href="https://rickandmortyapi.com/" target="_blank">Rick and Morty API</a>.
+    </p>
   </div>
 </template>
 
 <script>
 import SaisonsMenu from '../components/SaisonsMenu'
+import CharacterSearch from '../components/CharacterSearch'
 
 export default {
   name: 'HomeView',
   components: {
-    SaisonsMenu
+    SaisonsMenu,
+    CharacterSearch
   }
 }
 </script>
@@ -34,6 +42,7 @@ h2 {
   font-family: "Creepster", Arial;
   font-weight: normal;
   font-size: 40px;
+  margin: 50px 0;
 }
 h3 {
   font-family: "Creepster", Arial;
@@ -53,5 +62,9 @@ label {
 }
 .field {
   margin: 10px 0;
+}
+p {
+  line-height: 32px;
+  margin: 50px 0;
 }
 </style>

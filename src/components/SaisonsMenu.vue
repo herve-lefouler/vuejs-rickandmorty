@@ -63,7 +63,7 @@ export default {
         episodesPerSeasons[saisonIndex] = {
           saisonName: saisonIndex,
           episodes: [],
-          isActive: (saisonIndex === 'S01')
+          isActive: false // (saisonIndex === 'S01')
         }
       }
       // On concatène au tableau l'épisode
